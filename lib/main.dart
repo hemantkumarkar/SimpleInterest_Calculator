@@ -21,6 +21,7 @@ class SIForm extends StatefulWidget {
 }
 
 class _SIFormState extends State<SIForm> {
+  var _formkey = GlobalKey<FormState>();
   var _currencies = ["Rupees", "Dollars", "Pounds"];
   final _minimumPadding = 5.0;
   var _currentSelectedItem = "Rupees";
@@ -41,8 +42,11 @@ class _SIFormState extends State<SIForm> {
           ),
         ),
       ),
-      body: Container(
-        margin: EdgeInsets.all(_minimumPadding * 2),
+      body: Form(
+        key: _formkey,
+        child: Padding(
+          padding: EdgeInsets.all(_minimumPadding*2),
+          //margin: EdgeInsets.all(_minimumPadding * 2),
         child: ListView(
           children: [
             getAssetImage(),
@@ -51,9 +55,16 @@ class _SIFormState extends State<SIForm> {
                 top: _minimumPadding,
                 bottom: _minimumPadding,
               ),
-              child: TextField(
+              child: TextFormField(
                 keyboardType: TextInputType.number,
                 controller: principleController,
+                validator: <String>(value){
+                  if(value.isEmpty){
+                    return 'Please enter principle amount';
+                  }
+                   //return null;
+                },
+
                 decoration: InputDecoration(
                   labelText: 'Principle',
                   hintText: 'Enter Principle e.g 12000',
@@ -66,9 +77,14 @@ class _SIFormState extends State<SIForm> {
             Padding(
               padding: EdgeInsets.only(
                   top: _minimumPadding, bottom: _minimumPadding),
-              child: TextField(
+              child: TextFormField(
                 keyboardType: TextInputType.number,
                 controller: roiController,
+                validator: <String>(value){
+                  if(value.isEmpty){
+                    return 'Please enter rate of interest';
+                  }
+                },
                 decoration: InputDecoration(
                   labelText: 'Rate of interest',
                   hintText: 'In percent',
@@ -83,11 +99,16 @@ class _SIFormState extends State<SIForm> {
                   top: _minimumPadding, bottom: _minimumPadding),
               child: Row(children: [
                 Expanded(
-                  child: TextField(
+                  child: TextFormField(
                     keyboardType: TextInputType.number,
                     controller: termController,
+                    validator: <String>(value){
+                      if(value.isEmpty){
+                        return 'Please enter term in years';
+                      }
+                    },
                     decoration: InputDecoration(
-                      labelText: 'Years',
+                      labelText: 'Term',
                       hintText: 'Times in years',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
@@ -126,7 +147,9 @@ class _SIFormState extends State<SIForm> {
                         child: ElevatedButton(
                             onPressed: () {
                               setState(() {
-                                _displayResult = _calculateTotalReturns();
+                                if(_formkey.currentState!.validate()) {
+                                  _displayResult = _calculateTotalReturns();
+                                }
                               });
                             },
                             child: Text(
@@ -155,7 +178,7 @@ class _SIFormState extends State<SIForm> {
             )
           ],
         ),
-      ),
+      ),)
     );
   }
 
