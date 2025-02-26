@@ -160,7 +160,10 @@ class _SIFormState extends State<SIForm> {
                         child: ElevatedButton(
                             onPressed: () {
                               setState(() {
-                                _reset();
+                                if(_formkey.currentState!.validate()){
+                                  _reset();
+                                }
+
                               });
                             },
                             child: Text(
