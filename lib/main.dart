@@ -179,7 +179,7 @@ class _SIFormState extends State<SIForm> {
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey
+                            backgroundColor: Colors.green
                             ),
                             child: Text(
                               'Reset',
