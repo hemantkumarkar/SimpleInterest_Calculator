@@ -5,10 +5,14 @@ void main() {
     debugShowCheckedModeBanner: false,
     title: "Simple Interest Calculator App",
     home: SIForm(),
-    // theme: ThemeData(
-    //   primaryColor: Colors.indigo,
-    //   scaffoldBackgroundColor: Colors.black,
-    // ),
+    theme: ThemeData(
+      primaryColor: Colors.indigo,
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.deepPurple,
+
+      )
+    ),
+
   ));
 }
 
@@ -34,11 +38,12 @@ class _SIFormState extends State<SIForm> {
     // TODO: implement build
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      //backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text(
           "Simple Interest Calculator",
           style: TextStyle(
-            color: Colors.indigo,
+            color: Colors.white,
           ),
         ),
       ),
@@ -108,7 +113,8 @@ class _SIFormState extends State<SIForm> {
                       }
                     },
                     decoration: InputDecoration(
-                      labelText: 'Term',
+                      labelText: 'Term'
+                      ,
                       hintText: 'Times in years',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
@@ -152,9 +158,15 @@ class _SIFormState extends State<SIForm> {
                                 }
                               });
                             },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.deepPurple
+                            ),
                             child: Text(
                               'Calculate',
-                              style: TextStyle(color: Colors.indigo),
+
+                              style: TextStyle(color: Colors.black,
+                                fontSize: 18.0
+                              ),
                             ))),
                     Expanded(
                         child: ElevatedButton(
@@ -166,10 +178,13 @@ class _SIFormState extends State<SIForm> {
 
                               });
                             },
+                            style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.grey
+                            ),
                             child: Text(
                               'Reset',
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,fontSize: 18.0,
                               ),
                             ))),
                   ],
