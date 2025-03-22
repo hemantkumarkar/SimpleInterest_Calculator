@@ -224,6 +224,4 @@ class _SIFormState extends State<SIForm> {
     _displayResult='';
     _currentSelectedItem=_currencies[0];
   }
-}
-
 
